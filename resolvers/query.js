@@ -2,14 +2,12 @@ const categories = require("../data/category");
 const products = require("../data/product");
 
 module.exports = {
-  products: () => {
-    return products;
-  },
-  getProduct: (parent, args, context) => {
-    return products.find((product) => product.id === args.id);
+  products: (parent, args, { products }) => products,
+  getProduct: (parent, { id }, { products }) => {
+    return products.find((product) => product.id === id);
   },
   getCategories: () => categories,
-  getCategory: (parent, args, context) => {
-    return categories.find((category) => category.id === args.id);
+  getCategory: (parent, { id }, { categories }) => {
+    return categories.find((category) => category.id === id);
   },
 };
